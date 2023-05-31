@@ -1,18 +1,36 @@
-const leftName = document.querySelector('.left .name');
-const leftViews = document.querySelector('.left .views');
-const rightName = document.querySelector('.right .name');
-const rightViews = document.querySelector('.right .views');
-const btnGroup = document.querySelector('.btn-group');
-const moreBtn = document.querySelector('.more-btn');
-const lessBtn = document.querySelector('.less-btn');
-const modal = document.querySelector('.modal');
-const modalResult = document.querySelector('.modal-result');
-const score = document.querySelector('.score');
+root = document.getElementById('root');
 
-let songInfos = [];
-let currentScore = 0;
-let left = '';
-let right = '';
+let songs = [];
+let left = {};
+let right = {};
+let score = 0;
+let hideViews = true;
+let hideBtn = false;
+
+const fetch = () => {
+  songs = [
+    {
+      name: '드라큘라',
+      views: 293783,
+      src: 'https://www.youtube.com/embed/OPo5-e_XacE'
+    },
+    {
+      name: '신장개업',
+      views: 290198,
+      src: 'https://www.youtube.com/embed/Vd3cnq3Gdbs'
+    },
+    {
+      name: '화성침공',
+      views: 217409,
+      src: 'https://www.youtube.com/embed/HqVg8c4kRXY'
+    },
+    {
+      name: '세실 호텔',
+      views: 173520,
+      src: 'https://www.youtube.com/embed/4CHXJTDkk08'
+    }
+  ];
+};
 
 const shuffle = arr => {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -21,91 +39,70 @@ const shuffle = arr => {
   }
 };
 
-const fetch = () => {
-  songInfos = [
-    {
-      name: '드라큘라',
-      views: 293783
-    },
-    {
-      name: '신장개업',
-      views: 290198
-    },
-    {
-      name: '화성침공',
-      views: 217409
-    },
-    {
-      name: '세실 호텔',
-      views: 173520
-    }
-  ];
-};
-
-const displayModal = () => {
-  score.textContent = currentScore;
-
-  modalResult.textContent = songInfos.length === 0 ? '모든 문제를 맞추었습니다.' : '틀렸습니다.';
-  modal.style.display = 'block';
-};
-
-const setData = () => {
-  if (right == '') {
-    left = songInfos.pop();
-    right = songInfos.pop();
-  } else {
-    left = { ...right };
-    right = songInfos.pop();
+const setSelected = () => {
+  if (songs.length === 0) {
+    alert('End');
+    return;
   }
-  leftName.textContent = left.name;
-  leftViews.textContent = left.views + '회';
-  rightName.textContent = right.name;
+
+  left = Object.keys(right).length ? { ...right } : songs.pop();
+  right = songs.pop();
+  hideBtn = false;
+  hideViews = true;
+  render();
 };
 
-const displayViews = () => {
-  btnGroup.style.display = 'none';
-  rightViews.textContent = right.views + '회';
+const render = () => {
+  root.innerHTML = `
+  <div class="container">
+    <div class="left">
+      <h2 class="left-title">${left.name}</h2>
+      <iframe class="left-video" width="100%" src="${left.src}"></iframe>
+      <p class="views">${left.views}회</p>
+    </div>
+    <div class="right">
+      <h2 class="right-title">${right.name}</h2>
+      <iframe class="left-video" width="100%" src="${right.src}"></iframe>
+      <p class="views ${hideViews ? 'hide' : ''}">${right.views}회</p>
+      <div class="btn-group ${hideBtn ? 'hide' : ''}">
+        <button class="more-btn" type="button">더 많이</button>
+        <button class="less-btn" type="button">더 적게</button>
+      </div>
+    </div>
+  </div>
+  `;
 };
 
-const hideViews = () => {
-  btnGroup.style.display = 'block';
-  rightViews.textContent = '';
-};
+root.addEventListener('click', ({ target }) => {
+  if (target.classList.contains('more-btn')) {
+    hideBtn = true;
+    hideViews = false;
+    render();
 
-moreBtn.addEventListener('click', () => {
-  displayViews();
-
-  if (left.views <= right.views) {
-    currentScore += 1;
-    if (songInfos.length === 0) {
-      displayModal();
-      return;
+    if (left.views <= right.views) {
+      score += 1;
+      setTimeout(() => {
+        setSelected();
+      }, 1500);
     }
-    setData();
-    hideViews();
-  } else {
-    displayModal();
   }
-});
 
-lessBtn.addEventListener('click', () => {
-  displayViews();
+  if (target.classList.contains('less-btn')) {
+    hideBtn = true;
+    hideViews = false;
+    render();
 
-  if (left.views >= right.views) {
-    currentScore += 1;
-    if (songInfos.length === 0) {
-      displayModal();
-      return;
+    if (left.views > right.views) {
+      score += 1;
+      setTimeout(() => {
+        setSelected();
+      }, 1000);
     }
-    setData();
-    hideViews();
-  } else {
-    displayModal();
   }
 });
 
 window.addEventListener('load', () => {
   fetch();
-  shuffle(songInfos);
-  setData();
+  shuffle(songs);
+  setSelected();
 });
