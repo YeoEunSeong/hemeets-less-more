@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>히미츠 더 많이 더 적게</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="./js/app.js"></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="left">
+        <!-- <iframe width="420" height="315" src="https://www.youtube.com/embed/kANXBQw9w0U"> </iframe> -->
+        <iframe
+          width="854"
+          height="480"
+          src="https://www.youtube.com/embed/ZwKhufmMxko"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+
+        <span class="name"></span>
+        <span class="views"></span>
+      </div>
+      <div class="right">
+        <div class="text-group">
+          <span class="name"></span>
+          <span class="views"></span>
+        </div>
+        <div class="btn-group">
+          <button class="more-btn" type="button">더 많이</button>
+          <button class="less-btn" type="button">더 적게</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal">
+      <span class="modal-result"></span>
+      당신의 점수는 <span class="score"></span>점 입니다.
+    </div>
+  </body>
+</html>
