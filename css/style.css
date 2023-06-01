@@ -6,6 +6,9 @@
   font-size: 1rem;
   font-weight: 400;
 }
+body {
+  background-color: #000;
+}
 
 .hide {
   display: none;
@@ -16,7 +19,7 @@
   background: #000;
   color: #fff;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   flex-direction: column;
   justify-content: space-between;
 }
