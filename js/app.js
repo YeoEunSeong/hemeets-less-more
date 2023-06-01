@@ -1,4 +1,4 @@
-root = document.getElementById('root');
+const root = document.getElementById('root');
 
 let songs = [];
 let left = {};
@@ -37,19 +37,6 @@ const shuffle = arr => {
   }
 };
 
-const setSelected = () => {
-  if (songs.length === 0) {
-    alert('End');
-    return;
-  }
-
-  left = Object.keys(right).length ? { ...right } : songs.pop();
-  right = songs.pop();
-  hideBtn = false;
-  hideViews = true;
-  render();
-};
-
 const render = () => {
   root.innerHTML = `
   <div class="container">
@@ -67,6 +54,7 @@ const render = () => {
         <button class="less-btn" type="button">더 적게</button>
       </div>
     </div>
+    <div class="modal hide"></div>
   </div>
   `;
 };
@@ -74,6 +62,30 @@ const render = () => {
 const render_views = () => {
   document.querySelector('.btn-group').classList.add('hide');
   document.querySelector('.right .views').classList.remove('hide');
+};
+
+const render_modal = () => {
+  const modal = document.querySelector('.modal');
+  modal.classList.remove('hide');
+  modal.innerHTML = `
+  <div class="modal-desc">
+    ${songs.length === 0 ? '모든 문제를 맞추셨습니다.' : '게임이 끝났습니다.'}<br/>
+    당신의 점수는 <span class="score">${score}</span>점 입니다.
+  </div>
+  `;
+};
+
+const setSelected = () => {
+  if (songs.length === 0) {
+    render_modal();
+    return;
+  }
+
+  left = Object.keys(right).length ? { ...right } : songs.pop();
+  right = songs.pop();
+  hideBtn = false;
+  hideViews = true;
+  render();
 };
 
 root.addEventListener('click', ({ target }) => {
@@ -85,6 +97,8 @@ root.addEventListener('click', ({ target }) => {
       setTimeout(() => {
         setSelected();
       }, 1500);
+    } else {
+      render_modal();
     }
   }
 
@@ -96,6 +110,8 @@ root.addEventListener('click', ({ target }) => {
       setTimeout(() => {
         setSelected();
       }, 1000);
+    } else {
+      render_modal();
     }
   }
 });
