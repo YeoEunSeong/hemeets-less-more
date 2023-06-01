@@ -226,6 +226,7 @@ const setSelected = () => {
 };
 
 const reset = () => {
+  score = 0;
   fetch();
   shuffle(songs);
   setSelected();
