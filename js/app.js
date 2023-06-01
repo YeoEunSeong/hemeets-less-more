@@ -4,8 +4,6 @@ let songs = [];
 let left = {};
 let right = {};
 let score = 0;
-let hideViews = true;
-let hideBtn = false;
 
 const fetch = () => {
   songs = [
@@ -62,9 +60,9 @@ const render = () => {
     </div>
     <div class="right">
       <h2 class="right-title">${right.name}</h2>
-      <iframe class="left-video" width="100%" src="${right.src}"></iframe>
-      <p class="views ${hideViews ? 'hide' : ''}">${right.views}회</p>
-      <div class="btn-group ${hideBtn ? 'hide' : ''}">
+      <iframe class="right-video" width="100%" src="${right.src}"></iframe>
+      <p class="views hide">${right.views}회</p>
+      <div class="btn-group">
         <button class="more-btn" type="button">더 많이</button>
         <button class="less-btn" type="button">더 적게</button>
       </div>
@@ -73,11 +71,14 @@ const render = () => {
   `;
 };
 
+const render_views = () => {
+  document.querySelector('.btn-group').classList.add('hide');
+  document.querySelector('.right .views').classList.remove('hide');
+};
+
 root.addEventListener('click', ({ target }) => {
   if (target.classList.contains('more-btn')) {
-    hideBtn = true;
-    hideViews = false;
-    render();
+    render_views();
 
     if (left.views <= right.views) {
       score += 1;
@@ -88,9 +89,7 @@ root.addEventListener('click', ({ target }) => {
   }
 
   if (target.classList.contains('less-btn')) {
-    hideBtn = true;
-    hideViews = false;
-    render();
+    render_views();
 
     if (left.views > right.views) {
       score += 1;
