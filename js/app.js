@@ -174,6 +174,7 @@ const shuffle = arr => {
 
 const render = () => {
   root.innerHTML = `
+  <h1 class="title">히미츠 더 많이 더 적게</h1>
   <div class="container">
     <div class="left">
       <h2 class="left-title">${left.name}</h2>
