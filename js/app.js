@@ -71,6 +71,7 @@ const render_modal = () => {
   <div class="modal-desc">
     ${songs.length === 0 ? '모든 문제를 맞추셨습니다.' : '게임이 끝났습니다.'}<br/>
     당신의 점수는 <span class="score">${score}</span>점 입니다.
+    <button class="replay">다시하기</button>
   </div>
   `;
 };
@@ -85,6 +86,13 @@ const setSelected = () => {
   right = songs.pop();
   hideBtn = false;
   hideViews = true;
+  render();
+};
+
+const reset = () => {
+  fetch();
+  shuffle(songs);
+  setSelected();
   render();
 };
 
@@ -114,10 +122,12 @@ root.addEventListener('click', ({ target }) => {
       render_modal();
     }
   }
+
+  if (target.classList.contains('replay')) {
+    reset();
+  }
 });
 
 window.addEventListener('load', () => {
-  fetch();
-  shuffle(songs);
-  setSelected();
+  reset();
 });
