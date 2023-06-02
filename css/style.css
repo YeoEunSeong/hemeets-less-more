@@ -20,6 +20,7 @@ button {
 
 body {
   background-color: #000;
+  color: #fff;
   font-family: 'KBO-Dia-Gothic_bold';
 }
 
@@ -29,6 +30,13 @@ body {
 
 .title {
   display: none;
+}
+
+.score-board {
+  display: block;
+  text-align: right;
+  margin: 5px;
+  font-size: 1.6rem;
 }
 
 .container {
