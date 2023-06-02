@@ -133,9 +133,13 @@ iframe {
     text-align: center;
     font-size: 3rem;
   }
+  .score-board {
+    margin: 24px;
+  }
   .container {
     flex-direction: row;
     align-items: center;
+    height: 80vh;
   }
   .left,
   .right {
