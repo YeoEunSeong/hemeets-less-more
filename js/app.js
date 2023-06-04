@@ -1,5 +1,3 @@
-const axios = require('axios');
-
 const root = document.getElementById('root');
 const url = 'https://hemeets-more-less-3ba28-default-rtdb.firebaseio.com/ranking.json';
 let username = '';
