@@ -102,28 +102,97 @@ iframe {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #000;
   background-color: #f7f7ff;
 }
 
 .modal-desc {
-  margin-top: -10%;
   width: 100%;
   text-align: center;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 2.4rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ranking,
+.replay {
+  width: 50%;
+  padding: 1rem;
+  font-size: 1.4rem;
+  font-family: 'KBO-Dia-Gothic_bold';
+}
+
+.modal-username {
+  z-index: 100;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.modal-ranking {
+  justify-content: start;
+  height: 90%;
+  padding: 24px;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem
+}
+
+.ranking-item-title {
+  margin-bottom: 2rem;
+}
+
+.ranking-item-rank {
+  width: 20%;
+}
+
+.ranking-item-username {
+  width: 60%;
+  margin-left: 3rem;
+}
+
+.ranking-item-score {
+  width: 20%;
+}
+
+.username-title {
+  font-size: 1.6rem;
   color: #000;
 }
 
-.replay {
-  position: absolute;
+.username-input {
+  width: 70%;
   padding: 1rem;
-  left: 50%;
-  font-size: 1.6rem;
-  transform: translateX(-50%);
-  font-family: 'KBO-Dia-Gothic_bold';
-  display: block;
-  width 100%;
+  margin-right: 12px;
+  border: 1px solid #000;
+  border-radius: 5px;
 }
+
+.username-btn {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+}
+
 
 @media screen and (min-width:768px) {
   .title {
@@ -152,5 +221,12 @@ iframe {
   .left-title,
   .right-title {
     margin-bottom: 12px;
+  }
+  .modal-desc {
+    font-size: 24px;
+  }
+
+  .ranking-item {
+    padding: 0 10%;
   }
 }
