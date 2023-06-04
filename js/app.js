@@ -174,6 +174,7 @@ const setRank = _rank => {
   }
   rank.sort((a, b) => b.score - a.score);
   rank = temp.filter((x, i) => i < 30);
+  rank.sort((a, b) => b.score - a.score);
   renderRankingModal();
 };
 
