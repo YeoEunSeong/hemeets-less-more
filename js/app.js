@@ -308,7 +308,7 @@ root.addEventListener('click', ({ target }) => {
     renderViews();
 
     if (left.views <= right.views) {
-      score += 6 - (right.views.toString().length - left.views.toString().length);
+      score += 6 - Math.abs(right.views.toString().length - left.views.toString().length);
       setTimeout(() => {
         setSelected();
       }, 1500);
@@ -322,7 +322,7 @@ root.addEventListener('click', ({ target }) => {
     renderViews();
 
     if (left.views >= right.views) {
-      score += 6 - (right.views.toString().length - left.views.toString().length);
+      score += 6 - Math.abs(right.views.toString().length - left.views.toString().length);
       setTimeout(() => {
         setSelected();
       }, 1000);
