@@ -172,9 +172,8 @@ const setRank = _rank => {
   for (const [_, value] of Object.entries(_rank)) {
     temp.push(value);
   }
-  rank.sort((a, b) => b.score - a.score);
+  temp.sort((a, b) => b.score - a.score);
   rank = temp.filter((x, i) => i < 30);
-  rank.sort((a, b) => b.score - a.score);
   renderRankingModal();
 };
 
